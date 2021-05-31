@@ -6,6 +6,33 @@
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
+		<script>
+			Vue.component("api_ui", {
+				data: function () {
+					return {
+						input: "",
+						result: ""
+					}
+				},
+				props: ["url"],
+				methods: {
+					api_request: function(arg) {
+						this.result = ""
+						axios
+							.get(this.url + arg.toString())
+							.then(response => (this.result = response.data))
+					}
+				},
+				template: `<div>
+								<p>
+									<input v-model="input">
+									<button v-on:click='api_request(input)'>変換</button>
+								</p>
+								<p> => {{ result }}</p>
+				</div>`
+			})
+		</script>
+
 		<h1>kanjinumbers</h1>
 		<p>kanjinumbersはアラビア数字を大字表記の漢数字に、大字表記の漢数字をアラビア数字に変換するサービスです。</p>
 		<p>以下のURLからWebAPIを利用するか、テキストボックスに入力してください。</p>
@@ -13,11 +40,11 @@
 		<div id = "app">
 			<h2>number2kanji</h2>
 			<p>{{ api_url }}/v1/number2kanji/{変換元のアラビア数字}</p>
+			<api_ui v-bind:url="this.api_url + '/v1/number2kanji/'"></api_ui>
 
 			<h2>kanji2number</h2>
 			<p> {{ api_url }}/v1/kanji2number/{変換元の漢数字}</p>
-			<h1>{{ result }}</h1>
-			<h1>{{ flag }}</h1>
+			<api_ui v-bind:url="this.api_url + '/v1/kanji2number/'"></api_ui>
 		</div>
 
 		<script>
@@ -26,12 +53,7 @@
 				data: {
 					api_url:'https://6tx7bxusqd.execute-api.us-east-2.amazonaws.com',
 					result: "result",
-					},
-				mounted() {
-	    			axios
-						.get("https://6tx7bxusqd.execute-api.us-east-2.amazonaws.com/v1/number2kanji/42")
-	    				.then(response => {this.result = response.data})
-	  				}
+					}
 				})
 		</script>
 	</body>
