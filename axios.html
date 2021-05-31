@@ -1,0 +1,30 @@
+
+<html>
+	<head>
+		<title>My first Vue app</title>
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{ info.data }}
+		</div>
+		<script>
+			new Vue({
+				el: '#app',
+				data () {
+					return {
+						info: null
+					}
+				},
+				mounted () {
+					axios
+						.get("https://6tx7bxusqd.execute-api.us-east-2.amazonaws.com/v1/number2kanji/42")
+						.then(response => (this.info = response))
+					//	.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+				}
+			})
+		</script>
+
+	</body>
+</html>
