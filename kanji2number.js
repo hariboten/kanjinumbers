@@ -74,6 +74,9 @@ exports.handler = async (event) => {
 	} catch {
 		const response = {
 			statusCode: 204,
+			headers:{
+				"access-control-allow-origin": "*"
+		},
 		};
 		return response;
 	}
