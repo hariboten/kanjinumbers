@@ -23,6 +23,8 @@ function	n2k_less_ten_thousand (num)
 }
 
 function	argument_check (arg_str) {
+	if (typeof arg_str !== "string")
+		throw "invailed argument type";
 	if (arg_str.length > 16)
 		throw "too long argument";
 	if (arg_str.length !== 1 && arg_str[0] === "0")
