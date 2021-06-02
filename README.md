@@ -3,7 +3,7 @@ kanjinumbersはアラビア数字を大字表記の漢数字に、大字表記�
 
 
 ## endpoints
-### アラビア数字数字から漢数字
+### アラビア数字から漢数字
 ```
 https://6tx7bxusqd.execute-api.us-east-2.amazonaws.com/v1/number2kanji/{変換元のアラビア数字}
 ```
