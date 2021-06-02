@@ -70,7 +70,7 @@ function	kanji2number(kanji) {
 exports.handler = async (event) => {
 	let number
 	try {
-		number = kanji2number(event.pathParameters.kanji);
+		number = kanji2number(decodeURI(event.pathParameters.kanji));
 	} catch {
 		const response = {
 			statusCode: 204,
